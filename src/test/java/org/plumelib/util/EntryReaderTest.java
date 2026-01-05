@@ -39,7 +39,7 @@ final class EntryReaderTest {
   void testBasicLineReading() throws IOException {
     String content = "line1\nline2\nline3\n";
     try (EntryReader reader =
-        new EntryReader(new StringReader(content), "test", false, null, null)) {
+        new EntryReader(new StringReader(content), "test", false, null, null, null, null)) {
       assertEquals("line1", reader.readLine());
       assertEquals("line2", reader.readLine());
       assertEquals("line3", reader.readLine());
@@ -78,7 +78,7 @@ final class EntryReaderTest {
   void testCommentRemoval() throws IOException {
     String content = "line1\n% comment line\nline2 % inline comment\nline3\n";
     try (EntryReader reader =
-        new EntryReader(new StringReader(content), "test", false, "^%.*", null)) {
+        new EntryReader(new StringReader(content), "test", false, "^%.*", null,)) {
       assertEquals("line1", reader.readLine());
       assertEquals("line2 % inline comment", reader.readLine()); // no inline comment removal
       assertEquals("line3", reader.readLine());
